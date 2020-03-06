@@ -1,0 +1,11 @@
+version: "2"
+services:
+  portainer:
+    image: portainer/portainer
+    ports:
+      - ${PORTAINER_AGENT_PORT}:8000
+      - ${PORTAINER_UI_PORT}:9000
+    restart: always
+    volumes:
+      - ${PORTAINER_LOCAL_STORAGE_PATH}:/data
+      - /var/run/docker.sock:/var/run/docker.sock
