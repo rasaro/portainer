@@ -22,7 +22,7 @@ services:
       - traefik
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ${PORTAINER_LOCAL_STORAGE_PATH}:/data
+      - ${PORTAINER_STORAGE_FOLDER}:/data
     deploy:
       mode: replicated
       replicas: 1
@@ -31,7 +31,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.portainer.rule=Host(`${PORTAINER_UI_DOMAIN}`)
+        - traefik.http.routers.portainer.rule=Host(`portainer.${DOMAIN}`)
         - traefik.http.routers.portainer.entryPoints=https
         - traefik.http.routers.portainer.tls=true
         - traefik.http.routers.portainer.tls.certresolver=letsencrypt
